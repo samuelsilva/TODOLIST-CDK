@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'basic_list_drag_drop_cdk';
+  title = 'Basic TODO LIST with CDK';
 }

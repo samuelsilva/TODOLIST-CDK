@@ -1,5 +1,7 @@
 # BasicListDragDropCdk
 
+Hi! This is just a project for fun! I really like to learn new APIs, new librarys (not so new, but CDK is not usuall in my work). Maybe I push this in my git someday. 
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6.
 
 ## Development server
