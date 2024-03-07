@@ -1,7 +1,13 @@
-<h2>Movies from Stallone</h2>
+<h2>{{title}}</h2>
 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let movie of movies" cdkDrag>
+    <div class="example-box" *ngFor="let list of todoList" cdkDrag>
         <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-        {{ movie }}
+        {{ list }} <button (click)="removeTasks(list)">Remove Task</button>
+    </div>
+
+    <div>
+          <!-- two-way bind using [(ngModel)]  -->
+    <input type="text" [(ngModel)]="tasks"> 
+    <button (click)="addTasks()">Add Task</button>
     </div>
 </div>

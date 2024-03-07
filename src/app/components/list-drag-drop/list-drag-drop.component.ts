@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
 import {
   CdkDrag,
   CdkDragDrop,
@@ -7,17 +9,23 @@ import {
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
 import { NgFor } from '@angular/common';
+//import { FormsModule, NgModel } from '@angular/forms';
+
 
 @Component({
   selector: 'app-list-drag-drop',
   templateUrl: './list-drag-drop.component.html',
   styleUrls: ['./list-drag-drop.component.css'],
   standalone: true,
-  imports: [ CdkDropList, NgFor, CdkDrag, CdkDragPlaceholder ]
+  imports: [ CdkDropList, NgFor, CdkDrag, CdkDragPlaceholder, FormsModule ]
 })
 
 export class ListDragDropComponent {
-  movies = [
+  title = "TODO List with CDK";
+  
+  public tasks = '';
+  
+  public todoList = [
     'Rocky 1',
     'Rocky 2',
     'Rocky 3',
@@ -36,6 +44,15 @@ export class ListDragDropComponent {
   ];
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.movies, event.previousIndex,event.currentIndex);
+    moveItemInArray(this.todoList, event.previousIndex,event.currentIndex);
   }
+
+  addTasks(){
+    this.todoList.push(this.tasks);
+  }
+
+  removeTasks(item: any){
+    this.todoList.splice(this.todoList.indexOf(item),1);
+  }
+  
 }
