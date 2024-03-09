@@ -8,7 +8,7 @@ import {
   CdkDropList,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 //import { FormsModule, NgModel } from '@angular/forms';
 
 
@@ -17,30 +17,31 @@ import { NgFor } from '@angular/common';
   templateUrl: './list-drag-drop.component.html',
   styleUrls: ['./list-drag-drop.component.css'],
   standalone: true,
-  imports: [ CdkDropList, NgFor, CdkDrag, CdkDragPlaceholder, FormsModule ]
+  imports: [ CdkDropList, NgFor, CdkDrag, CdkDragPlaceholder, FormsModule, NgIf ]
 })
 
 export class ListDragDropComponent {
   title = "TODO List with CDK";
   
   public tasks = '';
-  
+  public editMode = false; // boolean attribute to edit list 
+
   public todoList = [
-    'Rocky 1',
-    'Rocky 2',
-    'Rocky 3',
-    'Rocky 4',
-    'Rocky 5',
-    'Rambo 1',
-    'Rambo 2',
-    'Rambo 3',
-    'Rambo 4',
-    'Rambo 5',
-    'O Demolidor',
-    'Os Mercenários 1',
-    'Os Mercenários 2',
-    'Os Mercenários 3',
-    'Os Mercenários 4',
+    { content: 'Rocky 1', editing: false }, 
+    { content: 'Rocky 2', editing: false },
+    { content: 'Rocky 3', editing: false },
+    { content: 'Rocky 4', editing: false },
+    { content: 'Rocky 5', editing: false },
+    { content: 'Rambo 1', editing: false },
+    { content: 'Rambo 2', editing: false },
+    { content: 'Rambo 3', editing: false },
+    { content: 'Rambo 4', editing: false },
+    { content: 'Rambo 5', editing: false },
+    { content: 'O Demolidor', editing: false },
+    { content: 'Os Mercenários 1', editing: false },
+    { content: 'Os Mercenários 2', editing: false },
+    { content: 'Os Mercenários 3', editing: false },
+    { content: 'Os Mercenários 4', editing: false },
   ];
 
   drop(event: CdkDragDrop<string[]>) {
@@ -48,11 +49,20 @@ export class ListDragDropComponent {
   }
 
   addTasks(){
-    this.todoList.push(this.tasks);
+    this.todoList.push({content: this.tasks, editing: false});
+    this.tasks = ''; // clean the field after the insert 
   }
 
   removeTasks(item: any){
     this.todoList.splice(this.todoList.indexOf(item),1);
   }
-  
+
+  editTasks(item: any) {
+    item.editing = true;
+  }
+
+  saveTasks(item: any) {
+    item.editing = false;
+  }
+
 }

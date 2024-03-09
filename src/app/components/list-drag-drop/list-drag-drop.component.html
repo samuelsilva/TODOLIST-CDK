@@ -1,8 +1,17 @@
 <h2>{{title}}</h2>
 <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let list of todoList" cdkDrag>
+    <div class="example-box" *ngFor="let item of todoList; let i = index" cdkDrag>
         <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-        {{ list }} <button (click)="removeTasks(list)">Remove Task</button>
+        <!-- IF editmode then show input-->
+        <div *ngIf="item.editing; else displayContent">
+            <input type="text" [(ngModel)]="item.content">
+            <button (click)="saveTasks(item)">Save</button>  
+        </div>
+        <!-- IF not editmode then show normal content and edit button-->
+        <ng-template #displayContent>
+            <span (click)="editTasks(item)">{{ item.content }}</span>
+            <button (click)="removeTasks(item)">Remove Task</button>
+        </ng-template>
     </div>
 
     <div class="example-box">
