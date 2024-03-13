@@ -58,11 +58,26 @@ export class ListDragDropComponent {
   }
 
   editTasks(item: any) {
-    item.editing = true;
+    item.originalContent = item.content;
+    item.editing = true; // enter edition mode
   }
 
   saveTasks(item: any) {
     item.editing = false;
   }
+
+  onKeyPress(event: KeyboardEvent, item: any){
+    if(event.keyCode === 13) { // verify if key pressed is "Enter key"
+      this.saveTasks(item); // save the edition
+    } else if (event.keyCode === 27) {
+      this.cancelEditTasks(item); // cancel the edition
+    }
+  }
+
+  cancelEditTasks(item: any) {
+    item.content = item.originalContent; // Restore the original task value
+    item.editing = false; // close edition mode
+  }
+
 
 }

@@ -4,8 +4,8 @@
         <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
         <!-- IF editmode then show input-->
         <div *ngIf="item.editing; else displayContent">
-            <input type="text" [(ngModel)]="item.content">
-            <button (click)="saveTasks(item)">Save</button>  
+            <input type="text" [(ngModel)]="item.content" (keyup)="onKeyPress($event, item)">
+            <!--<button (click)="saveTasks(item)">Save</button> -->  
         </div>
         <!-- IF not editmode then show normal content and edit button-->
         <ng-template #displayContent>
